@@ -11,11 +11,27 @@ public class readfileUtil {
         StringBuilder res=new StringBuilder();
         String s=in.readLine();
         while (s!=null){
-            res.append(s).append("\n");
+            res.append(s).append(System.lineSeparator());
             s=in.readLine();
         }
         return res.toString();
     }
+    public static String delPrefix(String s){
+        String[] lines=s.split(System.lineSeparator());
+        StringBuilder res=new StringBuilder();
+        for(String line:lines){
+           if(line.contains(".")){
+               int m=line.indexOf('.');
+               res.append(line.substring(m+1));
+           }
+           else {
+               res.append(line);
+           }
+            res.append(System.lineSeparator());
+        }
+        return res.toString();
+    }
+
 //    public static void main(String[] args){
 //        readfileUtil test=new readfileUtil();
 //        try {

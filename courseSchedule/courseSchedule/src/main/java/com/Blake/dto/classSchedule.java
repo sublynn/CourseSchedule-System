@@ -25,7 +25,7 @@ public class classSchedule {
         this.month=month;
         this.day=day;
         try {
-            String readCourses=readfileUtil.readFile(pathName);
+            String readCourses=readfileUtil.delPrefix(readfileUtil.readFile(pathName));
             String[] Courses=readCourses.split("\n");
             for(int i=0;i<Courses.length;i++){
                 courses.add(new Course(Courses[i]));
