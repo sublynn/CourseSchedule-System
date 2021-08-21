@@ -17,6 +17,11 @@ public class classSchedule {
     private int month;
     private int day;
     private  ArrayList<Course> courses;
+    /**
+     * todo：
+     * 将下面的private String PATH="/Users/blake/IdeaProjects/CourseSchedule-System/courseSchedule/courseSchedule";
+     * 中双引号里的内容改为想要保存课程表文件的路径地址
+     */
     private String PATH="/Users/blake/IdeaProjects/CourseSchedule-System/courseSchedule/courseSchedule";
 
     public classSchedule(int year,int month,int day, String pathName) {
@@ -35,6 +40,15 @@ public class classSchedule {
         }
 
     }
+    public classSchedule(int year,int month,int day, ArrayList<String> s){
+        courses=new ArrayList<>();
+        this.year=year;
+        this.month=month;
+        this.day=day;
+        for(int i=0;i<s.size();i++){
+            courses.add(new Course(s.get(i)));
+        }
+    }
     public ArrayList<String> getDays(){
         DateTime today=new DateTime(year,month,day,0,0);
         int index=0;
@@ -48,43 +62,45 @@ public class classSchedule {
                 if(index==courses.size()-1){break;}
                 res.add(today.toString("MM-dd")+" "+"下午"+" "+courses.get(index).getContent());
                 index+=1;
-                if(index==courses.size()-1)break;
+                if(index==courses.size()-1) {
+                    break;
+                }
             }
             else if(DateUtil.getDayofweek(today.toString("yyyy-MM-dd"))==2){
                 res.add(today.toString("MM-dd")+" "+"上午"+" "+courses.get(index).getContent());
                 index+=1;
-                if(index==courses.size()-1)break;
+                if(index==courses.size()-1){break;}
                 res.add(today.toString("MM-dd")+" "+"下午"+" "+"党日活动（班务活动）");
             }
             else if(DateUtil.getDayofweek(today.toString("yyyy-MM-dd"))==3){
                 res.add(today.toString("MM-dd")+" "+"上午"+" "+courses.get(index).getContent());
                 index+=1;
-                if(index==courses.size()-1)break;
+                if(index==courses.size()-1){break;}
                 res.add(today.toString("MM-dd")+" "+"下午"+" "+"形势政策知识讲堂");
             }
             else if(DateUtil.getDayofweek(today.toString("yyyy-MM-dd"))==4){
                 res.add(today.toString("MM-dd")+" "+"上午"+" "+courses.get(index).getContent());
                 index+=1;
-                if(index==courses.size()-1)break;
+                if(index==courses.size()-1){break;}
                 res.add(today.toString("MM-dd")+" "+"下午"+" "+courses.get(index).getContent());
                 index+=1;
-                if(index==courses.size()-1)break;
+                if(index==courses.size()-1){break;}
             }
             else if(DateUtil.getDayofweek(today.toString("yyyy-MM-dd"))==5){
                 if(today.toString("yyyy-MM-dd").equals("2021-09-02")){
                     res.add(today.toString("MM-dd")+" "+"上午"+" "+courses.get(index).getContent());
                     index+=1;
-                    if(index==courses.size()-1)break;
+                    if(index==courses.size()-1){break;}
                 }
                 else {res.add(today.toString("MM-dd")+" "+"上午"+" "+"专题报告");}
                 res.add(today.toString("MM-dd")+" "+"下午"+" "+courses.get(index).getContent());
                 index+=1;
-                if(index==courses.size()-1)break;
+                if(index==courses.size()-1){break;}
             }
             else if(DateUtil.getDayofweek(today.toString("yyyy-MM-dd"))==6){
                 res.add(today.toString("MM-dd")+" "+"上午"+" "+courses.get(index).getContent());
                 index+=1;
-                if(index==courses.size()-1)break;
+                if(index==courses.size()-1){break;}
                 res.add(today.toString("MM-dd")+" "+"下午"+" "+"自学");
             }
             today=today.plusDays(1);
@@ -153,13 +169,13 @@ public class classSchedule {
         //输出
         System.out.println("课程表.xls 成功生成！");
     }
-    public static void main(String[] args){
-        classSchedule test=new classSchedule(2021,9,1,"/Users/blake/IdeaProjects/poilearn/poiLearn/src/main/resources/副本1、8.31-9.30市厅级干部进修班 (第 44 期）习近平新时代中国特色社会主义思想专题)教学计划.txt");
-        ArrayList<String> res=test.getDays();
-        for (String re : res) {
-            System.out.println(re);
-        }
-
-    }
+//    public static void main(String[] args){
+//        classSchedule test=new classSchedule(2021,9,1,"/Users/blake/IdeaProjects/poilearn/poiLearn/src/main/resources/副本1、8.31-9.30市厅级干部进修班 (第 44 期）习近平新时代中国特色社会主义思想专题)教学计划.txt");
+//        ArrayList<String> res=test.getDays();
+//        for (String re : res) {
+//            System.out.println(re);
+//        }
+//
+//    }
 
 }
